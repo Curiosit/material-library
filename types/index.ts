@@ -11,9 +11,16 @@ export interface CustomButtonProps {
 }
 
 export interface SearchMaterialTypeProps {
-    materialType: string;
-    setMaterialType: (materialType: string) => void;
+    type: string;
+    setType: (materialType: string) => void;
 }
+export interface FilterProps {
+    manufacturer?: string;
+    year?: number;
+    model?: string;
+    limit?: number;
+    fuel?: string;
+  }
 
 export interface CarProps {
     city_mpg: number;
@@ -30,6 +37,23 @@ export interface CarProps {
     year: number;
 
 }
+export interface MaterialProps {
+    
+    name: string;
+    type: string;
+    density?: number;
+    uvalue?: number;
+    carbon?: number;
+    carbonperunit?: string;
+    imgpath?: string;
+    biogenic?: boolean;
+
+}
+export interface MaterialFilterProps {
+    name?: string;
+    type?: string;
+  }
+
 
 export interface CustomFilterProps {
     title: string;

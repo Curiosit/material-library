@@ -6,6 +6,7 @@ import { SearchMaterial } from '.';
 import Image from 'next/image';
 import {useRouter} from 'next/navigation'
 
+
 const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
   <button type='submit' className={`-ml-3 z-10 ${otherClasses}`}>
     <Image
@@ -20,30 +21,30 @@ const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
 )
 
 const SearchBar = () => {
-    const [materialType, setMaterialType] = useState('');
-    const [model, setModel] = useState('');
+    const [type, setType] = useState('');
+    const [name, setName] = useState('');
     const router = useRouter();
     const handleSearch = (e:React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      console.log(materialType);
-      if(materialType === '' && model === '' ) {
+      console.log(type);
+      if(type === '' || name === '' ) {
         return alert('Please fill in the search bar')
       }
       
-      updateSearchParams(model.toLowerCase(), materialType.toLowerCase());
+      updateSearchParams(name.toLowerCase(), type.toLowerCase());
     };
 
-    const updateSearchParams = (model:string, materialType:string) => {
+    const updateSearchParams = (model:string, type:string) => {
       const searchParams = new URLSearchParams(window.location.search);
       if(model) {
-        searchParams.set('model', model);
+        searchParams.set('name', name.toLowerCase());
       } else {
-        searchParams.delete('model');
+        searchParams.delete('name');
       }
-      if(materialType) {
-        searchParams.set('materialType', materialType);
+      if(type) {
+        searchParams.set('type', type.toLowerCase());
       }else {
-        searchParams.delete('materialType');
+        searchParams.delete('type');
       }
 
       const newPathname = `${window.location.pathname}?${searchParams.toString()}`
@@ -58,26 +59,26 @@ const SearchBar = () => {
         <div className="searchbar__item">
 
             <SearchMaterial 
-            materialType = {materialType}
-            setMaterialType={setMaterialType}
+            type = {type}
+            setType={setType}
             />
-            <SearchButton otherClasses="sm:hidden"/>
+            <SearchButton otherClasses="sm:hidden"/> 
 
         </div>
         <div className="searchbar__item">
           <Image 
-          src="/model-icon.png"
+          src="/title.png"
           width={25}
           height={25}
-          alt="car model"
+          alt="name"
           className = "absolute w-[20px] h-[20px] ml-4"
           />
           <input
           type="text"
           name="model"
-          value={model}
-          onChange={(e) => setModel(e.target.value)}
-          placeholder="Tiguan"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Brick"
           className='searchbar__input'
           />
           <SearchButton otherClasses="sm:hidden"/>

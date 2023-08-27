@@ -8,6 +8,8 @@ import SearchMaterial from "./SearchMaterial";
 import CarCard from "./CarCard";
 import CarDetails from "./CarDetails";
 import ShowMore from "./ShowMore";
+import MaterialCard from "./MaterialCard";
+import MaterialDetails from "./MaterialDetails";
 export {
     Hero,
     CustomButton,
@@ -18,6 +20,8 @@ export {
     SearchMaterial,
     CarCard,
     CarDetails,
-    ShowMore
+    ShowMore,
+    MaterialCard,
+    MaterialDetails
 
 }

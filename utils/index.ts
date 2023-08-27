@@ -1,5 +1,8 @@
-import { CarProps, FilterProps } from "@/types";
+import { CarProps, FilterProps, MaterialFilterProps } from "@/types";
+import { connectToDB } from "./database";
 
+import { materialTypes } from "@/constants";
+import materials from "@/models/Material";
 
 export async function fetchCars(filters: FilterProps) {
     const headers = {
@@ -10,6 +13,27 @@ export async function fetchCars(filters: FilterProps) {
     const response = await fetch (`https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&limit=${limit}&fuel_type=${fuel}`, {headers: headers});
     const result = await response.json();
     return result;
+}
+export async function fetchMaterials(filters: MaterialFilterProps) {
+  
+    const { name, type } = filters;
+    const db = await connectToDB();
+    const keyword = name;
+    var regex = RegExp("." + keyword + ".");
+    let allmaterials = [];
+    console.log(name);
+    if(type) {
+      allmaterials = await materials.find({type: type})
+    } else {
+      allmaterials = await materials.find({});
+    }
+    
+    //const allmaterials = await materials.find({});
+    console.log("materials");
+    console.log(allmaterials);
+
+    return allmaterials;
+   
 }
 
 export const calculateCarRent = (city_mpg: number, year: number) => {
@@ -52,3 +76,6 @@ export const calculateCarRent = (city_mpg: number, year: number) => {
     const newPathname = `${window.location.pathname}?${searchParams.toString()}`
     return newPathname;
   }
+
+
+  

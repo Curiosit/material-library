@@ -1,45 +1,9 @@
-export const materials = [
-  "Acura",
-  "Alfa Romeo",
-  "Aston Martin",
-  "Audi",
-  "Bentley",
-  "BMW",
-  "Buick",
-  "Cadillac",
-  "Chevrolet",
-  "Chrysler",
-  "Citroen",
-  "Dodge",
-  "Ferrari",
-  "Fiat",
-  "Ford",
-  "GMC",
-  "Honda",
-  "Hyundai",
-  "Infiniti",
-  "Jaguar",
-  "Jeep",
-  "Kia",
-  "Lamborghini",
-  "Land Rover",
-  "Lexus",
-  "Lincoln",
-  "Maserati",
-  "Mazda",
-  "McLaren",
-  "Mercedes-Benz",
-  "MINI",
-  "Mitsubishi",
-  "Nissan",
-  "Porsche",
-  "Ram",
-  "Rolls-Royce",
-  "Subaru",
-  "Tesla",
-  "Toyota",
-  "Volkswagen",
-  "Volvo",
+export const materialTypes = [
+  "structural",
+  "insulation",
+  "finish"
+  
+
 ];
 
 export const yearsOfProduction = [
@@ -55,19 +19,16 @@ export const yearsOfProduction = [
   { title: "2023", value: "2023" },
 ];
 
-export const fuels = [
+export const origin = [
   {
-    title: "Fuel",
-    value: "",
+    title: "Biogenic",
+    value: "Biogenic",
   },
   {
-    title: "Gas",
-    value: "Gas",
+    title: "Non-biogenic",
+    value: "Non-biogenic",
   },
-  {
-    title: "Electricity",
-    value: "Electricity",
-  },
+  
 ];
 
   
