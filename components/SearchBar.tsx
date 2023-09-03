@@ -7,6 +7,7 @@ import Image from 'next/image';
 import {useRouter} from 'next/navigation'
 
 
+
 const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
   <button type='submit' className={`ml-3 z-10 ${otherClasses}`}>
     <Image
@@ -20,18 +21,7 @@ const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
   </button>
 )
 
-const ClearButton = ({ otherClasses }: { otherClasses: string }) => (
-  <button type='reset' className={`ml-3 z-10 ${otherClasses}`}>
-    <Image
-    src="/close-button.svg"
-    alt="clear"
-    height={40}
-    width={40}
-    className='object-contain'
-    />
 
-  </button>
-)
 
 const SearchBar = () => {
     const [type, setType] = useState('');
@@ -63,6 +53,22 @@ const SearchBar = () => {
       const newPathname = `${window.location.pathname}?${searchParams.toString()}`
       console.log(newPathname);
       router.push(newPathname, {scroll: false});
+    }
+    const ClearButton = ({ otherClasses }: { otherClasses: string }) => (
+      <button type='button' className={`ml-3 z-10 ${otherClasses}`}>
+        <Image
+        src="/close-button.svg"
+        alt="clear"
+        height={40}
+        width={40}
+        className='object-contain'
+        onClick={handleClickClear}
+        />
+    
+      </button>
+    )
+    const handleClickClear = () => {
+      router.push("/", {scroll: false});
     }
   return (
 
