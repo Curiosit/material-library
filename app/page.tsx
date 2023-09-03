@@ -1,5 +1,5 @@
 import { MaterialCard, CarCard, CustomFilter, Hero, SearchBar, ShowMore } from '@/components'
-import { fuels, yearsOfProduction } from '@/constants';
+
 import { fetchCars, fetchMaterials } from '@/utils';
 
 import Image from 'next/image'
