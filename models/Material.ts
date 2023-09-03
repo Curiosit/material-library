@@ -9,7 +9,7 @@ const materialsSchema = new Schema <MaterialProps> ( {
 )
 
 
-let materials;
+let materials: any;
 
 try {
     materials = models.materials || model('materials');
