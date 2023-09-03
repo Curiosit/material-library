@@ -13,6 +13,7 @@ export interface CustomButtonProps {
 export interface SearchParams {
     name?: string;
     type?: string;
+    limit?: number;
 }
 
 export interface SearchMaterialTypeProps {
