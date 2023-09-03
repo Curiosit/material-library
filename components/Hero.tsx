@@ -5,13 +5,17 @@ import { CustomButton } from '.'
 
 const Hero = () => {
     const handleScroll = () => {
+        const nextSection = document.getElementById("discover");
 
+        if (nextSection) {
+          nextSection.scrollIntoView({ behavior: "smooth" });
+        }
     }
   return (
     <div className='Hero'>
         <div className='flex-1 pt-36 padding-x'>
         
-            <h1 className='hero__title flex '>
+            <h1 className='hero__title flex '  >
             <Image
                         src="/widgets.png"
                         alt="Logo"

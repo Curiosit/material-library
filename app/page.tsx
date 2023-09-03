@@ -13,6 +13,9 @@ export default async function Home({searchParams}) {
     model: searchParams.model || '',
   
   });
+  console.log("PARAMS ####################################################")
+  console.log(searchParams.name)
+  console.log(searchParams.type)
   const allMaterials = await fetchMaterials({
     name: searchParams.name || '',
     type: searchParams.type || '',
@@ -32,7 +35,7 @@ export default async function Home({searchParams}) {
           <h1 className='text-4x1 font-extrabold'>Material Catalogue</h1>
           <p>Explore various building materials</p>
         </div>
-          <div className="home__filters">
+          <div className="home__filters" id='discover'>
             <SearchBar />
 
             {/* <div className='home__filter-container' >

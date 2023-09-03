@@ -17,7 +17,7 @@ const SearchMaterial = ({type, setType}:SearchMaterialTypeProps) => {
     item.toLowerCase().replace(/\s+/g, "")
     .includes(query.toLowerCase().replace(/\s+/g, ""))
   ))
-    
+  console.log(filteredMaterials);
 
   return (
     <div className='search-manufacturer'>

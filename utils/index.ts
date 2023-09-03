@@ -19,14 +19,33 @@ export async function fetchMaterials(filters: MaterialFilterProps) {
     const { name, type } = filters;
     const db = await connectToDB();
     const keyword = name;
-    var regex = RegExp("." + keyword + ".");
+    
     let allmaterials = [];
+    console.log("FETCH ###############");
     console.log(name);
     if(type) {
-      allmaterials = await materials.find({type: type})
+      if(name) {
+        console.log("1")
+        allmaterials = await materials.find({name: {'$regex': name, '$options': 'i'}, type: {'$regex': type, '$options': 'i'}})
+      }
+      else {
+        console.log("2")
+        allmaterials = await materials.find({type: {'$regex': type, '$options': 'i'}})
+      }
+      
     } else {
-      allmaterials = await materials.find({});
+      if(name) {
+        console.log("3")
+        allmaterials = await materials.find({name: {'$regex': name, '$options': 'i'}})
+      }
+      else {
+        console.log("4")
+        allmaterials = await materials.find({});
+      }
+      
+      
     }
+    
     
     //const allmaterials = await materials.find({});
     console.log("materials");
