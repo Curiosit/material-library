@@ -10,6 +10,11 @@ export interface CustomButtonProps {
     isDisabled?: boolean;
 }
 
+export interface SearchParams {
+    name?: string;
+    type?: string;
+}
+
 export interface SearchMaterialTypeProps {
     type: string;
     setType: (materialType: string) => void;

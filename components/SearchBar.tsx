@@ -8,10 +8,23 @@ import {useRouter} from 'next/navigation'
 
 
 const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
-  <button type='submit' className={`-ml-3 z-10 ${otherClasses}`}>
+  <button type='submit' className={`ml-3 z-10 ${otherClasses}`}>
     <Image
     src="/magnifying-glass.svg"
     alt="magnyfying glass"
+    height={40}
+    width={40}
+    className='object-contain'
+    />
+
+  </button>
+)
+
+const ClearButton = ({ otherClasses }: { otherClasses: string }) => (
+  <button type='reset' className={`ml-3 z-10 ${otherClasses}`}>
+    <Image
+    src="/close-button.svg"
+    alt="clear"
     height={40}
     width={40}
     className='object-contain'
@@ -63,7 +76,7 @@ const SearchBar = () => {
             setType={setType}
             />
             <SearchButton otherClasses="sm:hidden"/> 
-
+            <ClearButton otherClasses="sm:hidden"/> 
         </div>
         <div className="searchbar__item">
           <Image 
@@ -82,8 +95,10 @@ const SearchBar = () => {
           className='searchbar__input'
           />
           <SearchButton otherClasses="sm:hidden"/>
+          <ClearButton otherClasses="sm:hidden"/> 
         </div>
         <SearchButton otherClasses="max-sm:hidden"/>
+        <ClearButton otherClasses="max-sm:hidden"/> 
     </form>
   )
 }

@@ -1,21 +1,15 @@
 import { MaterialCard, CarCard, CustomFilter, Hero, SearchBar, ShowMore } from '@/components'
+import { SearchParams } from '@/types';
 
 import { fetchCars, fetchMaterials } from '@/utils';
 
 import Image from 'next/image'
-
-export default async function Home({searchParams}) {
-  const allCars = await fetchCars({
-    manufacturer: searchParams.materialType || '',
-    year: searchParams.year || 2022,
-    fuel: searchParams.fuel || '',
-    limit: searchParams.limit || 10,
-    model: searchParams.model || '',
+interface SearchParamsProps {
+  searchParams: SearchParams;
+}
+export default async function Home({searchParams}: SearchParamsProps) {
   
-  });
-  console.log("PARAMS ####################################################")
-  console.log(searchParams.name)
-  console.log(searchParams.type)
+  const {name, type} = searchParams;
   const allMaterials = await fetchMaterials({
     name: searchParams.name || '',
     type: searchParams.type || '',
