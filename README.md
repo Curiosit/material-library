@@ -1,5 +1,5 @@
 ## Material library
-Material library is a nextjs app for architects and investors for searching ideal materials for their projects. User can search the library and sort materials according to various metrics: costs, density, function, carbon footprint, etc.
+Material library is Work-in-progress nextjs app for architects and investors for searching ideal materials for their projects. User can search the library and sort materials according to various metrics: costs, density, function, carbon footprint, etc.
 The app has been deployed to vercel: https://material-library.vercel.app/
 
 
