@@ -55,11 +55,28 @@ export interface MaterialProps {
     biogenic?: boolean;
 
 }
+export interface EPDProps {
+    
+    name: string;
+
+
+}
+
+export interface MaterialTable7Props {
+    
+    NAVN: string;
+    A1A3: number;
+
+
+}
 export interface MaterialFilterProps {
     name?: string;
     type?: string;
   }
-
+  export interface EPDFilterProps {
+    name?: string;
+    type?: string;
+  }
 
 export interface CustomFilterProps {
     title: string;

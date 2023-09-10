@@ -1,7 +1,7 @@
 import { MaterialCard, CarCard, CustomFilter, Hero, SearchBar, ShowMore } from '@/components'
 import { SearchParams } from '@/types';
 
-import { fetchCars, fetchMaterials } from '@/utils';
+import { fetchCars, fetchEPDs, fetchMaterials } from '@/utils';
 
 import Image from 'next/image'
 interface SearchParamsProps {
@@ -10,7 +10,7 @@ interface SearchParamsProps {
 export default async function Home({searchParams}: SearchParamsProps) {
   
   const {name, type} = searchParams;
-  const allMaterials = await fetchMaterials({
+  const allMaterials = await fetchEPDs({
     name: searchParams.name || '',
     type: searchParams.type || '',
   });
