@@ -68,8 +68,10 @@ const SearchBar = () => {
       </button>
     )
     const handleClickClear = () => {
+      
       router.push("/", {scroll: false});
     }
+    
   return (
 
 

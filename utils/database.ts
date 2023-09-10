@@ -3,6 +3,7 @@ import mongoose, {ConnectOptions} from "mongoose";
 let isConnected = false; 
 
 export const connectToDB = async () => {
+    console.log("Try connect");
     mongoose.set('strictQuery', true);
 
     if(isConnected) {
@@ -12,7 +13,8 @@ export const connectToDB = async () => {
 
     try {
         console.log('trying');
-        await mongoose.connect(process.env.MONGODB_URI!, {
+        await mongoose.connect(process.env.MONGODB_URI!,
+             {family: 4,
             dbName: "material-library",
             useNewUrlParser: true,
             useUnifiedTopology: true,

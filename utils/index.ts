@@ -1,8 +1,10 @@
-import { CarProps, FilterProps, MaterialFilterProps } from "@/types";
+import { CarProps, FilterProps, MaterialFilterProps, EPDProps } from "@/types";
 import { connectToDB } from "./database";
 
 import { materialTypes } from "@/constants";
 import materials from "@/models/Material";
+import materialsTable7 from "@/models/MaterialTable7";
+import epd from "@/models/EPD";
 
 export async function fetchCars(filters: FilterProps) {
     const headers = {
@@ -53,6 +55,23 @@ export async function fetchMaterials(filters: MaterialFilterProps) {
 
     return allmaterials;
    
+}
+
+export async function fetchMaterialsTable7(filters: MaterialFilterProps) {
+  
+  const db = await connectToDB();
+  //console.log(db);
+  let allmaterials = [];
+  
+
+  
+  allmaterials = await epd.find({});
+  
+  console.log("materials");
+  console.log(allmaterials); 
+
+  return allmaterials;
+ 
 }
 
 export const calculateCarRent = (city_mpg: number, year: number) => {

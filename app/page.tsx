@@ -1,14 +1,14 @@
-import { MaterialCard, CarCard, CustomFilter, Hero, SearchBar, ShowMore } from '@/components'
+import { MaterialCard, CustomFilter, Hero, SearchBar, ShowMore } from '@/components'
 import { SearchParams } from '@/types';
 
-import { fetchCars, fetchMaterials } from '@/utils';
+import { fetchCars, fetchMaterialsTable7, fetchMaterials } from '@/utils';
 
 import Image from 'next/image'
 interface SearchParamsProps {
   searchParams: SearchParams;
 }
 export default async function Home({searchParams}: SearchParamsProps) {
-  
+  console.log("Starting page")
   const {name, type} = searchParams;
   const allMaterials = await fetchMaterials({
     name: searchParams.name || '',

@@ -34,7 +34,7 @@ const Hero = () => {
                 handleClick={handleScroll}
                 />
         </div>
-        <div className="hero__image-container">
+        {/* <div className="hero__image-container">
             <div className='hero__image'>
                 <Image src="/pngegg.png"
                 alt="hero"
@@ -48,7 +48,7 @@ const Hero = () => {
 
 
             
-        </div>
+        </div> */}
     </div>
   )
 }
