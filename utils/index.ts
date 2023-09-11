@@ -57,7 +57,7 @@ export async function fetchMaterials(filters: MaterialFilterProps) {
 }
 export async function fetchEPDs(filters: EPDFilterProps) {
   
-  const { name, type } = filters;
+  const { name, type, limit } = filters;
   const db = await connectToDB();
   const keyword = name;
   
@@ -87,7 +87,7 @@ export async function fetchEPDs(filters: EPDFilterProps) {
     
   } */
   
-  allmaterials = await epd.find({});
+  allmaterials = await epd.find({}).limit(limit);
   //const allmaterials = await materials.find({});
   
   console.log("materials");

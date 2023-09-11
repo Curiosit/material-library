@@ -13,6 +13,7 @@ export default async function Home({searchParams}: SearchParamsProps) {
   const allMaterials =  await fetchEPDs({
     name: searchParams.name || '',
     type: searchParams.type || '',
+    limit: searchParams.limit || 10,
   }); 
   console.log("page materials");
   console.log(allMaterials);
@@ -54,7 +55,7 @@ export default async function Home({searchParams}: SearchParamsProps) {
             </section>
           ):(
             <div className='home__error-container'>
-              <h2 className='text-black text-xl'>No materialss</h2>
+              <h2 className='text-black text-xl'>No materials</h2>
               <p></p>
             </div>
           )}

@@ -59,7 +59,12 @@ export interface EPDProps {
     
     name: string;
     A1A3?: number;
+    C3?: number;
+    C4?: number;
+    D?: number;
     unit?: string;
+    mass?: number;
+    url?: string;
 }
 
 export interface MaterialTable7Props {
@@ -76,6 +81,7 @@ export interface MaterialFilterProps {
   export interface EPDFilterProps {
     name?: string;
     type?: string;
+    limit?: number;
   }
 
 export interface CustomFilterProps {

@@ -12,7 +12,7 @@ interface EPDCardProps {
 }
 
 function MaterialCard({ material}:EPDCardProps) {
-    const {name, A1A3, unit} = material;
+    const {name, A1A3, C3, C4, D, unit, mass} = material;
     console.log(material);
     
     const [isOpen, setIsOpen ] = useState(false);
