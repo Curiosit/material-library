@@ -1,7 +1,7 @@
 
 "use client"
 
-import { MaterialProps } from '@/types';
+import { EPDProps, MaterialProps } from '@/types';
 import React from 'react';
 import Image from 'next/image';
 import { Fragment } from 'react';
@@ -12,7 +12,7 @@ import { generateCarImageUrl } from '@/utils';
 interface MaterialDetailsProps {
     isOpen: boolean;
     closeModal: () => void;
-    material: MaterialProps;
+    material: EPDProps;
 }
 
 const MaterialDetails = ({isOpen, closeModal, material}: MaterialDetailsProps) => {
