@@ -1,8 +1,9 @@
-import { CarProps, FilterProps, MaterialFilterProps } from "@/types";
+import { CarProps, FilterProps, MaterialFilterProps, EPDFilterProps } from "@/types";
 import { connectToDB } from "./database";
 
 import { materialTypes } from "@/constants";
 import materials from "@/models/Material";
+import epd from "@/models/EPD";
 
 export async function fetchCars(filters: FilterProps) {
     const headers = {
@@ -53,6 +54,47 @@ export async function fetchMaterials(filters: MaterialFilterProps) {
 
     return allmaterials;
    
+}
+export async function fetchEPDs(filters: EPDFilterProps) {
+  
+  const { name, type } = filters;
+  const db = await connectToDB();
+  const keyword = name;
+  
+  let allmaterials:any = [];
+  console.log("FETCH ###############");
+  console.log(name);
+/*   if(type) {
+    if(name) {
+      console.log("1")
+      allmaterials = await materials.find({name: {'$regex': name, '$options': 'i'}, type: {'$regex': type, '$options': 'i'}})
+    }
+    else {
+      console.log("2")
+      allmaterials = await materials.find({type: {'$regex': type, '$options': 'i'}})
+    }
+    
+  } else {
+    if(name) {
+      console.log("3")
+      allmaterials = await materials.find({name: {'$regex': name, '$options': 'i'}})
+    }
+    else {
+      console.log("4")
+      allmaterials = await materials.find({});
+    }
+    
+    
+  } */
+  
+  allmaterials = await epd.find({});
+  //const allmaterials = await materials.find({});
+  
+  console.log("materials");
+  console.log(allmaterials);
+
+  return allmaterials;
+ 
 }
 
 export const calculateCarRent = (city_mpg: number, year: number) => {
