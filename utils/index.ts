@@ -61,7 +61,7 @@ export async function fetchEPDs(filters: EPDFilterProps) {
   const db = await connectToDB();
   const keyword = name;
   
-  let allmaterials = [];
+  let allmaterials:any = [];
   console.log("FETCH ###############");
   console.log(name);
 /*   if(type) {
@@ -87,8 +87,9 @@ export async function fetchEPDs(filters: EPDFilterProps) {
     
   } */
   
-  allmaterials = await epd.find({});
+  //allmaterials = await epd.find({});
   //const allmaterials = await materials.find({});
+  
   console.log("materials");
   console.log(allmaterials);
 
