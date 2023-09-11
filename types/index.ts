@@ -58,8 +58,8 @@ export interface MaterialProps {
 export interface EPDProps {
     
     name: string;
-
-
+    A1A3?: number;
+    unit?: string;
 }
 
 export interface MaterialTable7Props {

@@ -65,9 +65,7 @@ const MaterialDetails = ({isOpen, closeModal, material}: MaterialDetailsProps) =
                   <div className="flex-1 flex flex-col gap-3">
 
                     
-                  <div className="relative w-full h-40 bg-primary-green bg-cover bg-center rounded-lg">
-                  <Image src={material.imgpath? material.imgpath : '/error.png'} alt="material card img" fill priority className="object-contain" />
-                    </div> 
+                  
                   
                         
         

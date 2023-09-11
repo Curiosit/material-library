@@ -87,7 +87,7 @@ export async function fetchEPDs(filters: EPDFilterProps) {
     
   } */
   
-  //allmaterials = await epd.find({});
+  allmaterials = await epd.find({});
   //const allmaterials = await materials.find({});
   
   console.log("materials");

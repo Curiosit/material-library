@@ -10,10 +10,10 @@ interface SearchParamsProps {
 export default async function Home({searchParams}: SearchParamsProps) {
   
   const {name, type} = searchParams;
-  const allMaterials: any = []/* await fetchEPDs({
+  const allMaterials =  await fetchEPDs({
     name: searchParams.name || '',
     type: searchParams.type || '',
-  }); */
+  }); 
   console.log("page materials");
   console.log(allMaterials);
   const isDataEmpty = !Array.isArray(allMaterials) || allMaterials.length < 1 || !allMaterials;

@@ -2,7 +2,8 @@ import { EPDProps } from "@/types";
 import {Schema, model, models }  from "mongoose";
 const epdSchema = new Schema <EPDProps> ( {
     name: { type: String, required: true },
-    
+    A1A3: { type: Number},
+    unit: { type: String},
 }
 )
 
