@@ -7,12 +7,14 @@ Material library is Work-in-progress nextjs app for architects and investors for
 The app has been deployed to vercel: https://material-library.vercel.app/
 
 
-![catalogue](https://github.com/Curiosit/material-library/assets/17218693/266329d6-667b-41f4-b85d-2bb977b8c73f)
+![data](https://github.com/Curiosit/material-library/assets/17218693/34ae3fca-2afd-4201-be90-95f11d66421e)
+
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-![details](https://github.com/Curiosit/material-library/assets/17218693/510ba5f0-1a1b-4fba-b2e3-cf94c86d5a79)
+
+![datadet](https://github.com/Curiosit/material-library/assets/17218693/4adb5440-2f3f-4fdc-a30f-3cd3026bf522)
 
 
 
