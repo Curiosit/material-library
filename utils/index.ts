@@ -86,8 +86,15 @@ export async function fetchEPDs(filters: EPDFilterProps) {
     
     
   } */
+  if(name) {
+    console.log("3")
+    allmaterials = await epd.find({name: {'$regex': name, '$options': 'i'}}).limit(limit);
+  }
+  else {
+    console.log("4")
+    allmaterials = await epd.find({}).limit(limit);
+  }
   
-  allmaterials = await epd.find({}).limit(limit);
   //const allmaterials = await materials.find({});
   
   console.log("materials");

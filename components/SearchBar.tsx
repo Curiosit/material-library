@@ -30,25 +30,21 @@ const SearchBar = () => {
     const handleSearch = (e:React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       console.log(type);
-      if(type === '' && name === '' ) {
+      if(name === '' ) {
         return alert('Please fill in the search bar')
       }
       
-      updateSearchParams(name.toLowerCase(), type.toLowerCase());
+      updateSearchParams(name.toLowerCase());
     };
 
-    const updateSearchParams = (model:string, type:string) => {
+    const updateSearchParams = (model:string) => {
       const searchParams = new URLSearchParams(window.location.search);
       if(model) {
         searchParams.set('name', name.toLowerCase());
       } else {
         searchParams.delete('name');
       }
-      if(type) {
-        searchParams.set('type', type.toLowerCase());
-      }else {
-        searchParams.delete('type');
-      }
+      
 
       const newPathname = `${window.location.pathname}?${searchParams.toString()}`
       console.log(newPathname);
@@ -75,15 +71,7 @@ const SearchBar = () => {
 
     <form className='searchbar' onSubmit={handleSearch}>
 
-        <div className="searchbar__item">
-
-            <SearchMaterial 
-            type = {type}
-            setType={setType}
-            />
-            <SearchButton otherClasses="sm:hidden"/> 
-            <ClearButton otherClasses="sm:hidden"/> 
-        </div>
+        
         <div className="searchbar__item">
           <Image 
           src="/title.png"
