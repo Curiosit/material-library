@@ -24,7 +24,7 @@ function MaterialCard({ material}:EPDCardProps) {
         
             <p className="flex mt-1 mb-1 text-[16x]">
             
-            Subname
+            {material.TOTAL  } kgCO2 / {material.unit}
             </p>
         
         <div className="relative flex w-full mt-3">

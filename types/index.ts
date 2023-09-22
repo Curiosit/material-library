@@ -14,6 +14,7 @@ export interface SearchParams {
     name?: string;
     type?: string;
     limit?: number;
+    sortby?: string;
 }
 
 export interface SearchMaterialTypeProps {
@@ -65,6 +66,8 @@ export interface EPDProps {
     unit?: string;
     mass?: number;
     url?: string;
+    TOTAL?: number;
+    C3C4?: number;
 }
 
 export interface MaterialTable7Props {
@@ -77,6 +80,7 @@ export interface MaterialTable7Props {
 export interface MaterialFilterProps {
     name?: string;
     type?: string;
+    sortBy?:string;
   }
   export interface EPDFilterProps {
     name?: string;

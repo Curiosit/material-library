@@ -39,7 +39,7 @@ const SearchBar = () => {
 
     const updateSearchParams = (model:string) => {
       const searchParams = new URLSearchParams(window.location.search);
-      if(model) {
+      if(name) {
         searchParams.set('name', name.toLowerCase());
       } else {
         searchParams.delete('name');

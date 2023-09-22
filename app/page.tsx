@@ -1,5 +1,6 @@
 import { MaterialCard, CarCard, CustomFilter, Hero, SearchBar, ShowMore } from '@/components'
-import { SearchParams } from '@/types';
+import SortBy from '@/components/SortBy';
+import { EPDProps, SearchParams } from '@/types';
 
 import { fetchCars, fetchEPDs, fetchMaterials } from '@/utils';
 
@@ -10,17 +11,61 @@ interface SearchParamsProps {
 export default async function Home({searchParams}: SearchParamsProps) {
   
   const {name, type} = searchParams;
-  const allMaterials =  await fetchEPDs({
+  const fetchedMaterials =  await fetchEPDs({
     name: searchParams.name || '',
     type: searchParams.type || '',
     limit: searchParams.limit || 10,
   }); 
+  console.log("sortBy");
+  console.log(searchParams.sortby?.toUpperCase())
+  
+  const calculatedMaterials = calcMaterials(fetchedMaterials)
+  console.log("calc materials");
+  console.log(calculatedMaterials);
+  const allMaterials = sortMaterials(calculatedMaterials)
   console.log("page materials");
   console.log(allMaterials);
-  const isDataEmpty = !Array.isArray(allMaterials) || allMaterials.length < 1 || !allMaterials;
   
-
-
+  
+  const isDataEmpty = !Array.isArray(allMaterials) || allMaterials.length < 1 || !allMaterials;
+  function calcMaterials(arr: EPDProps[]): EPDProps[] {
+    return arr.map((item) => {
+      const C3C4 = (Number(item.C3) || 0) + (Number(item.C4) || 0);
+      const TOTAL = (Number(item.A1A3)|| 0) + (Number(item.C3)|| 0) + (Number(item.C4)|| 0);
+  
+      return {
+        ...item, // Copy existing properties
+        C3C4, // Add the new 'C3C4' field
+        TOTAL, // Add the new 'TOTAL' field
+      };
+    });
+  }
+  function sortMaterials<T>(arr: EPDProps[]): EPDProps[] {
+    if(searchParams.sortby) {
+      console.log(searchParams.sortby.toUpperCase())
+      return sortByField(arr, searchParams.sortby.toUpperCase());
+    }
+    else {
+     return sortByField(arr, "_id");
+    }
+  }
+  function sortByField<T>(arr: T[], fieldName: string, ascending = true): T[] {
+    const sortedArray = [...arr]; // Create a shallow copy of the original array
+  
+    sortedArray.sort((a, b) => {
+      const aValue: any = (a as any)[fieldName];
+      const bValue: any = (b as any)[fieldName];
+  
+      if (ascending) {
+        return aValue - bValue;
+      } else {
+        return bValue - aValue;
+      }
+    });
+  
+    return sortedArray;
+  }
+  
   return (
     <main className="overflow-hidden">
       <Hero />
@@ -33,10 +78,13 @@ export default async function Home({searchParams}: SearchParamsProps) {
           <div className="home__filters" id='discover'>
             <SearchBar />
 
-            {/* <div className='home__filter-container' >
-              <CustomFilter title="origin" options={origin}/>
-              <CustomFilter title="density" options={density}/>
-            </div> */}
+            
+
+            <div className="flex align-top">
+              <SortBy containerStyles='overflow-hidden' textValue='A1A3 GWP' sortByValue='A1A3'/>
+              <SortBy containerStyles='overflow-hidden' textValue='C3C4 GWP' sortByValue='C3C4'/>
+              <SortBy containerStyles='overflow-hidden' textValue='TOTAL GWP' sortByValue='TOTAL'/>
+            </div>
           </div>
 
 

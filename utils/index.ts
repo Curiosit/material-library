@@ -17,31 +17,32 @@ export async function fetchCars(filters: FilterProps) {
 }
 export async function fetchMaterials(filters: MaterialFilterProps) {
   
-    const { name, type } = filters;
+    const { name, type, sortBy } = filters;
     const db = await connectToDB();
     const keyword = name;
     
     let allmaterials = [];
     console.log("FETCH ###############");
     console.log(name);
+    
     if(type) {
       if(name) {
         console.log("1")
-        allmaterials = await materials.find({name: {'$regex': name, '$options': 'i'}, type: {'$regex': type, '$options': 'i'}})
+        allmaterials = await materials.find({name: {'$regex': name, '$options': 'i'}, type: {'$regex': type, '$options': 'i'}}).lean()
       }
       else {
         console.log("2")
-        allmaterials = await materials.find({type: {'$regex': type, '$options': 'i'}})
+        allmaterials = await materials.find({type: {'$regex': type, '$options': 'i'}}).lean()
       }
       
     } else {
       if(name) {
         console.log("3")
-        allmaterials = await materials.find({name: {'$regex': name, '$options': 'i'}})
+        allmaterials = await materials.find({name: {'$regex': name, '$options': 'i'}}).lean()
       }
       else {
         console.log("4")
-        allmaterials = await materials.find({});
+        allmaterials = await materials.find({}).lean();
       }
       
       
@@ -88,11 +89,11 @@ export async function fetchEPDs(filters: EPDFilterProps) {
   } */
   if(name) {
     console.log("3")
-    allmaterials = await epd.find({name: {'$regex': name, '$options': 'i'}}).limit(limit);
+    allmaterials = await epd.find({name: {'$regex': name, '$options': 'i'}}).limit(limit).lean();
   }
   else {
     console.log("4")
-    allmaterials = await epd.find({}).limit(limit);
+    allmaterials = await epd.find({}).limit(limit).lean();
   }
   
   //const allmaterials = await materials.find({});

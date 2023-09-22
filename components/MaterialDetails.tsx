@@ -6,7 +6,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { generateCarImageUrl } from '@/utils';
+
 
 
 interface MaterialDetailsProps {
@@ -76,6 +76,10 @@ const MaterialDetails = ({isOpen, closeModal, material}: MaterialDetailsProps) =
                     <h2 className='font-semibold text-xl capitalize'> {material.name}</h2>
                     <div className='mt-3 flex flex-wrap gap-4'>
                           <div className='flex justify-between gap-5 w-full text-right' >
+                            <h4 className='text-grey capitalize'>TOTAL</h4>
+                            <p className='text-black-100 font-semibold'>{material.TOTAL  } kgCO2 / {material.unit}</p>
+                          </div>
+                          <div className='flex justify-between gap-5 w-full text-right' >
                             <h4 className='text-grey capitalize'>A1-A3</h4>
                             <p className='text-black-100 font-semibold'>{material.A1A3} kgCO2 / {material.unit}</p>
                           </div>
@@ -95,10 +99,18 @@ const MaterialDetails = ({isOpen, closeModal, material}: MaterialDetailsProps) =
                             <h4 className='text-grey capitalize'>Density</h4>
                             <p className='text-black-100 font-semibold'>{material.mass} kg / {material.unit}</p>
                           </div>
+                          { material.mass ? (
+                            <div className='flex justify-between gap-5 w-full text-right' >
+                            <h4 className='text-grey capitalize'>TOTAL /KG</h4>
+                            <p className='text-black-100 font-semibold'>{Math.round((material.TOTAL || 0) / material.mass * 1000)/1000  } kgCO2 / KG</p>
+                          </div>
+                          ) : null }
+                          
                           <div className='flex justify-between gap-5 w-full text-right' >
-                            <h4 className='text-grey capitalize'>{material.url}</h4>
+                            <h4 className='text-grey capitalize'><a href={material.url}>{material.url}</a></h4>
                             
                           </div>
+
                       {/* {Object.entries(material).map(([key, value]) => (
                         <div className='flex justify-between gap-5 w-full text-right' key={key}>
                           <h4 className='text-grey capitalize'>{key.split("_").join(" ")}</h4>

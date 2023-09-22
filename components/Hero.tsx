@@ -12,8 +12,8 @@ const Hero = () => {
         }
     }
   return (
-    <div className='Hero'>
-        <div className='flex-1 pt-36 padding-x'>
+    <div className='mt-12 padding-x padding-y max-width'>
+        <div className=''>
         
             <h1 className='hero__title flex '  >
             <Image
@@ -27,12 +27,13 @@ const Hero = () => {
                 Easy Material Library</h1>
             <p className='hero__subtitle'>
                 Sort and pick the most suitable material for your project!</p>
-
+          <div className='w-full flex-center'>
                 <CustomButton 
                 title="Explore Materials"
                 containerStyles="bg-primary-green text-white rounded-full mt-10"
                 handleClick={handleScroll}
                 />
+                </div>
         </div>
         
     </div>
