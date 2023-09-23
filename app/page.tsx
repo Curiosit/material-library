@@ -1,3 +1,5 @@
+
+
 import { MaterialCard, CarCard, CustomFilter, Hero, SearchBar, ShowMore } from '@/components'
 import SortBy from '@/components/SortBy';
 import { EPDProps, SearchParams } from '@/types';
@@ -5,12 +7,15 @@ import { EPDProps, SearchParams } from '@/types';
 import { fetchCars, fetchEPDs, fetchMaterials } from '@/utils';
 
 import Image from 'next/image'
+import { useState } from 'react';
 interface SearchParamsProps {
   searchParams: SearchParams;
 }
 export default async function Home({searchParams}: SearchParamsProps) {
   
   const {name, type} = searchParams;
+  //const [sortingBy, setSortingBy] = useState('')
+
   const fetchedMaterials =  await fetchEPDs({
     name: searchParams.name || '',
     type: searchParams.type || '',
@@ -81,9 +86,9 @@ export default async function Home({searchParams}: SearchParamsProps) {
             
 
             <div className="flex align-top">
-              <SortBy containerStyles='overflow-hidden' textValue='A1A3 GWP' sortByValue='A1A3'/>
-              <SortBy containerStyles='overflow-hidden' textValue='C3C4 GWP' sortByValue='C3C4'/>
-              <SortBy containerStyles='overflow-hidden' textValue='TOTAL GWP' sortByValue='TOTAL'/>
+              <SortBy containerStyles='overflow-hidden' textValue='A1A3 GWP' sortByValue='A1A3' sortingBy={searchParams.sortby} />
+              <SortBy containerStyles='overflow-hidden' textValue='C3C4 GWP' sortByValue='C3C4' sortingBy={searchParams.sortby} />
+              <SortBy containerStyles='overflow-hidden' textValue='TOTAL GWP' sortByValue='TOTAL' sortingBy={searchParams.sortby} />
             </div>
           </div>
 
