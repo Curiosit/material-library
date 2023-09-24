@@ -6,7 +6,8 @@ import React from 'react';
 import Image from 'next/image';
 import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-
+import { CustomButton } from '.';
+import { useState, useEffect } from 'react'
 
 
 interface MaterialDetailsProps {
@@ -16,6 +17,58 @@ interface MaterialDetailsProps {
 }
 
 const MaterialDetails = ({isOpen, closeModal, material}: MaterialDetailsProps) => {
+  const [json, setJson] = useState('');
+  
+  
+  const createEPDx = () => {
+    const declared_factor = 1
+    const declared_unit = 1
+    const original_id = "ID"
+    const epdx_dict = {
+        'id':original_id,
+        'format_version': "0.3.0",
+        'name':material.name,
+        'version':"version 2 - 201222",
+        'declared_unit':declared_unit,
+        'valid_until':"2025-12-22T00:00:00",
+        "published_date": "2020-12-22T00:00:00",
+        'standard':'EN15804A1',
+        'subtype':"Generic",
+        'comment':'table7_id',
+        'reference_service_life':'',
+        'location':"DK",
+        'conversions':[
+            {"to": 'KG',
+             "value": ((material.mass || 1 ) * declared_factor)}
+        ],
+        gwp:{
+            "a1a3": ((material.A1A3 || 0) * declared_factor),
+            "a4": null,
+            "a5": null,
+            "b1": null,
+            "b2": null,
+            "b3": null,
+            "b4": null,
+            "b5": null,
+            "b6": null,
+            "b7": null,
+            "c1": null,
+            "c2": null,
+            "c3": ((material.C3 || 0) * declared_factor),
+            "c4":((material.C4 || 0) * declared_factor),
+            "d": ((material.D || 0) * declared_factor),
+        },
+        "source": {
+          "name": "BR18 - Tabel 7",
+          "url": (material.url || ''),
+        },
+      }
+      console.log(epdx_dict)
+      return epdx_dict;
+
+  }
+  
+  
   return (
     <>
     <Transition appear show={isOpen}
@@ -117,7 +170,20 @@ const MaterialDetails = ({isOpen, closeModal, material}: MaterialDetailsProps) =
                           <p className='text-black-100 font-semibold'>{String(value)}</p>
                         </div>
                       ))} */}
-
+                      <a
+                      href={`data:text/json;charset=utf-8,${encodeURIComponent(
+                        JSON.stringify(createEPDx())
+                      )}`}
+                      download="epdx.json"
+                      >
+                      {`Download EPDx Json`}
+                    </a>
+                      {/* <CustomButton
+                          title="Download EPDx"
+                          btnType='button'
+                          containerStyles="bg-primary-green hover:bg-transparent text-white hover:text-primary-green py-2 px-4 border border-primary-green rounded-full"
+                          handleClick={generateEPDx}
+                      /> */}
                     </div>
                   </div>
                 </Dialog.Panel>

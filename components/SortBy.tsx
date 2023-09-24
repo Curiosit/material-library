@@ -32,7 +32,8 @@ const SortBy = ({textValue, sortByValue, containerStyles, sortingBy}: sortByProp
         <CustomButton 
                 title={`${textValue}`}
                 btnType='button'
-                containerStyles={`${containerStyles} ${isButtonActive ? "bg-primary-green hover:bg-transparent text-white hover:text-primary-green" : "bg-transparent hover:bg-primary-green text-primary-green hover:text-white"}  py-2 px-4 border border-primary-green hover:border-transparent rounded-full`}
+                containerStyles={`${containerStyles} ${isButtonActive ? "bg-primary-green hover:bg-transparent text-white hover:text-primary-green" 
+                : "bg-transparent hover:bg-primary-green text-primary-green hover:text-white"}  py-2 px-4 border border-primary-green hover:border-transparent rounded-full`}
                 handleClick={() => handleUpdateParams(sortByValue)}
                 
         />
