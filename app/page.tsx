@@ -33,6 +33,8 @@ export default async function Home({searchParams}: SearchParamsProps) {
   
   
   const isDataEmpty = !Array.isArray(allMaterials) || allMaterials.length < 1 || !allMaterials;
+  const sortingBy = searchParams.sortby || '';
+
   function calcMaterials(arr: EPDProps[]): EPDProps[] {
     return arr.map((item) => {
       const C3C4 = (Number(item.C3) || 0) + (Number(item.C4) || 0);
@@ -45,6 +47,7 @@ export default async function Home({searchParams}: SearchParamsProps) {
       };
     });
   }
+
   function sortMaterials<T>(arr: EPDProps[]): EPDProps[] {
     if(searchParams.sortby) {
       console.log(searchParams.sortby.toUpperCase())
@@ -54,6 +57,7 @@ export default async function Home({searchParams}: SearchParamsProps) {
      return sortByField(arr, "_id");
     }
   }
+  
   function sortByField<T>(arr: T[], fieldName: string, ascending = true): T[] {
     const sortedArray = [...arr]; // Create a shallow copy of the original array
   
@@ -86,9 +90,9 @@ export default async function Home({searchParams}: SearchParamsProps) {
             
 
             <div className="flex align-top">
-              <SortBy containerStyles='overflow-hidden' textValue='A1A3 GWP' sortByValue='A1A3' sortingBy={searchParams.sortby} />
-              <SortBy containerStyles='overflow-hidden' textValue='C3C4 GWP' sortByValue='C3C4' sortingBy={searchParams.sortby} />
-              <SortBy containerStyles='overflow-hidden' textValue='TOTAL GWP' sortByValue='TOTAL' sortingBy={searchParams.sortby} />
+              <SortBy containerStyles='overflow-hidden' textValue='A1A3 GWP' sortByValue='A1A3' sortingBy={sortingBy} />
+              <SortBy containerStyles='overflow-hidden' textValue='C3C4 GWP' sortByValue='C3C4' sortingBy={sortingBy} />
+              <SortBy containerStyles='overflow-hidden' textValue='TOTAL GWP' sortByValue='TOTAL' sortingBy={sortingBy} />
             </div>
           </div>
 
