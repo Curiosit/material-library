@@ -21,11 +21,11 @@ const Footer = () => (
 
                 </Link>
                 <p className="text-base text-gray-700">Material Library
-                    <br /> All rights reserved &copy;</p>
+                    is an open source project. Check out the project on <a href="https://github.com/Curiosit/material-library"><b>GitHub</b></a></p>
 
             </div>
 
-            <div className='footer__links'>
+            {/* <div className='footer__links'>
 
                 {footerLinks.map((link) => (
                     <div key={link.title} className='footer__link'>
@@ -44,9 +44,9 @@ const Footer = () => (
 
 
 
+            </div> */}
             </div>
-            </div>
-            <div className='flex justify-between items-center 
+            {/* <div className='flex justify-between items-center 
             flex-wrap mt-10 border-t border-gray-100 sm:px-16 px-6 py-10'>
 
                 <div className="footer__copyrights-link">
@@ -61,7 +61,7 @@ const Footer = () => (
                     <p className="text-base text-gray-700">@2023 Material Library
                         All rights reserved &copy;</p>
                 </div>
-            </div>
+            </div> */}
         
     </footer>
 )
