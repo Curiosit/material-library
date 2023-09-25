@@ -8,6 +8,9 @@ import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { CustomButton } from '.';
 import { useState, useEffect } from 'react'
+import BarChart from './BarChart';
+
+
 
 
 interface MaterialDetailsProps {
@@ -158,6 +161,9 @@ const MaterialDetails = ({isOpen, closeModal, material}: MaterialDetailsProps) =
                             <p className='text-black-100 font-semibold'>{Math.round((material.TOTAL || 0) / material.mass * 1000)/1000  } kgCO2 / KG</p>
                           </div>
                           ) : null }
+
+
+                          <div className='w-full'><BarChart material={material} /></div>
                           
                           <div className='flex justify-between gap-5 w-full text-right' >
                             <h4 className='text-grey capitalize'><a href={material.url}>{material.url}</a></h4>
