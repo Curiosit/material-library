@@ -4,7 +4,7 @@ import { EPDProps, MaterialProps } from "@/types";
 import Image from "next/image";
 import React from 'react'
 import { useState } from 'react'
-import { CarDetails, CustomButton, MaterialDetails } from ".";
+import { CustomButton, MaterialDetails } from ".";
 import { calculateCarRent, generateCarImageUrl } from "@/utils";
  
 interface EPDCardProps {

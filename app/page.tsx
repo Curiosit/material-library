@@ -1,6 +1,6 @@
 
 
-import { MaterialCard, CarCard, CustomFilter, Hero, SearchBar, ShowMore } from '@/components'
+import { MaterialCard, CustomFilter, Hero, SearchBar, ShowMore } from '@/components'
 import SortBy from '@/components/SortBy';
 import { EPDProps, SearchParams } from '@/types';
 
