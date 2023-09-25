@@ -20,8 +20,6 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 
 
-The project is based on the Car showcase nextjs tutorial https://github.com/adrianhajdin/project_next13_car_showcase
-
 ## Forking and testing
 First, run the development server:
 
