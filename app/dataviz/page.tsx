@@ -1,6 +1,6 @@
 
 
-import { MaterialCard, CustomFilter, Hero, SearchBar, ShowMore } from '@/components'
+import { MaterialCard, CustomFilter, Hero, SearchBar, ShowMore, CustomButton } from '@/components'
 import D3BarChart from '@/components/D3BarChart';
 import DataViz from '@/components/DataViz';
 import Library from '@/components/Library';
@@ -12,12 +12,13 @@ import { fetchCars, fetchEPDs, fetchMaterials } from '@/utils';
 import Image from 'next/image'
 import { useState } from 'react';
 
+
 export default async function LibraryPage({searchParams}: SearchParamsProps) {
   
   const sortingBy = searchParams.sortby || '';
 
-
-
+ 
+  
 
 
 return (
@@ -32,7 +33,16 @@ return (
         <div className="home__filters" id='discover'>
             
           <div className="flex align-top">
-              
+          <CustomButton 
+                title="BarChart"
+                containerStyles="bg-primary-green hover:bg-transparent text-white hover:text-primary-green py-2 px-4 border border-primary-green rounded-full m-2"
+                
+                />
+          <CustomButton 
+                title="ScatterPlot"
+                containerStyles="bg-primary-green hover:bg-transparent text-white hover:text-primary-green py-2 px-4 border border-primary-green rounded-full m-2"
+                
+                />
           </div>
         
         </div>
