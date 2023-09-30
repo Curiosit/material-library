@@ -129,7 +129,7 @@ const D3ScatterPlot = ({ allMaterials }: any) => {
             .on("mouseleave", mouseleave)
             .on("mousemove", mousemove)
 
-
+        
 
 
 
