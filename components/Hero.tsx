@@ -2,14 +2,27 @@
 import React from 'react'
 import Image from 'next/image'
 import { CustomButton } from '.'
-
+import { useRouter } from 'next/navigation';
+import { updateSearchParams } from '@/utils'
 const Hero = () => {
+    const router = useRouter();
     const handleScroll = () => {
         const nextSection = document.getElementById("discover");
 
         if (nextSection) {
           nextSection.scrollIntoView({ behavior: "smooth" });
         }
+    }
+
+    
+    
+    const exploreMaterials = () => {
+      
+      router.push('./library');
+    }
+    const exploreData = () => {
+      
+      router.push('./dataviz');
     }
   return (
     <div className='mt-12 padding-x padding-y max-width'>
@@ -29,9 +42,14 @@ const Hero = () => {
                 Sort and pick the most suitable material for your project!</p>
           <div className='w-full flex-center'>
                 <CustomButton 
-                title="Explore Materials"
+                title="Material Library"
                 containerStyles="bg-primary-green text-white rounded-full mt-10"
-                handleClick={handleScroll}
+                handleClick={exploreMaterials}
+                />
+                <CustomButton 
+                title="Data Visualization"
+                containerStyles="bg-primary-green text-white rounded-full mt-10"
+                handleClick={exploreData}
                 />
                 </div>
         </div>
