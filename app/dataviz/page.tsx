@@ -1,6 +1,8 @@
 
 
 import { MaterialCard, CustomFilter, Hero, SearchBar, ShowMore } from '@/components'
+import D3BarChart from '@/components/D3BarChart';
+import DataViz from '@/components/DataViz';
 import Library from '@/components/Library';
 import SortBy from '@/components/SortBy';
 import { EPDProps, SearchParams, SearchParamsProps } from '@/types';
@@ -27,16 +29,15 @@ return (
            <h1 className='text-4x1 font-extrabold'>Material Data Visualization</h1> 
           
         </div>
-          <div className="home__filters" id='discover'>
+        <div className="home__filters" id='discover'>
             
-            
-
-            <div className="flex align-top">
+          <div className="flex align-top">
               
-            </div>
           </div>
+        
+        </div>
 
-
+        <DataViz searchParams={searchParams} />
          
 
       </div>
