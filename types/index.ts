@@ -56,6 +56,9 @@ export interface MaterialProps {
     biogenic?: boolean;
 
 }
+export interface SearchParamsProps {
+    searchParams: SearchParams;
+  }
 export interface EPDProps {
     
     name: string;
