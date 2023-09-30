@@ -26,7 +26,7 @@ return (
       <div className='mt-12 padding-x padding-y max-width' id="discover">
 
         <div className='home__text-container'>
-           <h1 className='text-4x1 font-extrabold'>Material Data Visualization</h1> 
+           {/* <h1 className='text-4x1 font-extrabold'>Material Data Visualization</h1> */} 
           
         </div>
         <div className="home__filters" id='discover'>
