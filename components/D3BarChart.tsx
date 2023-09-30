@@ -3,14 +3,21 @@ import React, { useState, useEffect } from "react";
 import * as d3 from "d3";
 import { EPDProps } from "@/types";
 import materials from "@/models/Material";
+import { CustomButton } from ".";
 interface MaterialItem {
     name: string;
-    TOTAL: number; // Assuming TOTAL is a numeric property
+    TOTAL: number;
+    unit: string;
+    A1A3: number;
+    C3: number;
+    C4: number; // Assuming TOTAL is a numeric property
     // Add other properties if needed
 }
 interface DataItem {
     name: string;
     value: number | undefined; // or whatever the actual type is
+    unit: string
+    arrayValue?: number[]
 }
 
 const D3BarChart = ({ allMaterials }: any) => {
@@ -23,12 +30,23 @@ const D3BarChart = ({ allMaterials }: any) => {
         const dataArray = allMaterials.map(item => ({
             name: item.name,
             value: parseFloat(item.TOTAL.toString()),
+            unit: item.unit,
+            arrayValue: [item.A1A3,item.C3,item.C4]
         }));
 
         return dataArray;
     };
-    
+    let stacked = 0;
+    const toggleStacked = () => {
+        if (stacked == 0) {
+            stacked = 1
+        } else {
+            stacked = 0
+        }
+        
+    }
     useEffect(() => {
+        
         console.log("MATERIALS")
         console.log(allMaterials)
         const allMaterialsArray = convertMaterialsToArray(allMaterials);
@@ -43,22 +61,25 @@ const D3BarChart = ({ allMaterials }: any) => {
         var mouseover = function (event: any, d: any) {
             //const node = d3.select(this.parentNode)
             tooltip
-                .html("" + d.name + "<br>" + "GWP: " + d.value)
+                .html("" + d.name + "<br>" + "GWP: " + d.value + "kgCO2/" + d.unit)
                 .style("opacity", 1)
+            d3.select(event.currentTarget).style("fill", "#27e693");
             console.log(d)
         }
         var mousemove = function (event: any, d: any) {
             tooltip
-                .style("left", (d3.mouse(this)[0] + 90) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
-                .style("top", (d3.mouse(this)[1]) + "px")
+                .style('top', event.pageY + 'px')
+                .style('left', (event.pageX + 10) + 'px')
+                console.log(event.pageY)
         }
         var mouseleave = function (event: any, d: any) {
             tooltip
                 .style("opacity", 0)
+            d3.select(event.currentTarget).style("fill", "black");
         }
 
         //////////////////
-        const margin = { top: 20, right: 20, bottom: 200, left: 70 };
+        const margin = { top: 20, right: 20, bottom: 250, left: 70 };
         const width = 960 - margin.left - margin.right;
         const height = 500 - margin.top - margin.bottom;
 
@@ -84,8 +105,33 @@ const D3BarChart = ({ allMaterials }: any) => {
             maxValue
         ]);
 
+        function update() {
 
+        
         /// BARS
+        if(stacked) {
+            svg
+            .selectAll(".bar")
+            .data(filteredData)
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
+            .attr("x", function (d: any) {
+                return x(d.name) as number;
+            })
+
+            .attr("width", x.bandwidth())
+
+
+            .attr("y", function (d: any) {
+                return y(0);
+            })
+            .attr("height", function (d) { return height - y(0); }) // always equal to 0
+            .on("mouseover", mouseover)
+            .on("mouseleave", mouseleave)
+            .on("mousemove", mousemove)
+        }
+        else {
         svg
             .selectAll(".bar")
             .data(filteredData)
@@ -100,14 +146,16 @@ const D3BarChart = ({ allMaterials }: any) => {
 
 
             .attr("y", function (d: any) {
-                return y(d.value);
+                return y(0);
             })
             .attr("height", function (d) { return height - y(0); }) // always equal to 0
             .on("mouseover", mouseover)
             .on("mouseleave", mouseleave)
+            .on("mousemove", mousemove)
 
-
-
+        }
+    }
+        update();
         svg.append("g").call(d3.axisLeft(y));
 
         svg
@@ -145,7 +193,8 @@ const D3BarChart = ({ allMaterials }: any) => {
             .style("border-width", "1px")
             .style("border-radius", "5px")
             .style("padding", "10px")
-        console.log(tooltip)
+            .style("position", "absolute")
+        
 
         // Three function that change the tooltip when user hover / move / leave a cell
         // https://d3-graph-gallery.com/graph/barplot_stacked_hover.html
@@ -161,6 +210,10 @@ const D3BarChart = ({ allMaterials }: any) => {
 
     return (
         <div className="bar-chart">
+            <CustomButton btnType='button'
+                          containerStyles="bg-primary-green hover:bg-transparent text-white hover:text-primary-green py-2 px-4 border border-primary-green rounded-full"
+                          title={"Stack"} 
+                          handleClick={toggleStacked} />
             {/* Additional JSX if needed */}
 
             <div id="my_dataviz"></div>

@@ -43,12 +43,12 @@ const Hero = () => {
           <div className='w-full flex-center'>
                 <CustomButton 
                 title="Material Library"
-                containerStyles="bg-primary-green text-white rounded-full mt-10"
+                containerStyles="bg-primary-green hover:bg-transparent text-white hover:text-primary-green py-2 px-4 border border-primary-green rounded-full m-2"
                 handleClick={exploreMaterials}
                 />
                 <CustomButton 
                 title="Data Visualization"
-                containerStyles="bg-primary-green text-white rounded-full mt-10"
+                containerStyles="bg-primary-green hover:bg-transparent text-white hover:text-primary-green py-2 px-4 border border-primary-green rounded-full m-2"
                 handleClick={exploreData}
                 />
                 </div>
