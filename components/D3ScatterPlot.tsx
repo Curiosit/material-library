@@ -28,10 +28,13 @@ const D3ScatterPlot = ({ allMaterials }: any) => {
 
 
     const convertMaterialsToArray = (allMaterials: MaterialItem[]) => {
-        const dataArray = allMaterials.map(item => ({
+        const dataArray = allMaterials.map(item => (
+            
+            {
+            
             name: item.name,
             valueX: parseFloat(item.A1A3.toString()),
-            valueY: parseFloat((item.C3 + item.C4).toString()),
+            valueY: parseFloat((item.C3.toString() == '-' ? 0 : item.C3 + item.C4).toString()),
             unit: item.unit,
 
         }));
@@ -106,7 +109,7 @@ const D3ScatterPlot = ({ allMaterials }: any) => {
 
         // Add Y axis
         var y = d3.scaleLinear()
-            .domain([-100, 100])
+            .domain([-1, 25])
             .range([height, 0]);
         svg.append("g")
             .call(d3.axisLeft(y));
