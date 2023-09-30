@@ -12,7 +12,7 @@ import { fetchCars, fetchEPDs, fetchMaterials } from '@/utils';
 import Image from 'next/image'
 import { useState } from 'react';
 
-export default async function BarChartPage({searchParams}: SearchParamsProps) {
+export default async function ScatterPlotPage({searchParams}: SearchParamsProps) {
   
   const sortingBy = searchParams.sortby || '';
 
@@ -37,7 +37,7 @@ return (
         
         </div>
 
-        <DataViz chartType={'barchart'} searchParams={searchParams} />
+        <DataViz chartType={'scatterplot'} searchParams={searchParams} />
          
 
       </div>

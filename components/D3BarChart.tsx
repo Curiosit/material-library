@@ -31,7 +31,7 @@ const D3BarChart = ({ allMaterials }: any) => {
             name: item.name,
             value: parseFloat(item.TOTAL.toString()),
             unit: item.unit,
-            arrayValue: [item.A1A3,item.C3,item.C4]
+            arrayValue: [item.A1A3, item.C3, item.C4]
         }));
 
         return dataArray;
@@ -43,10 +43,10 @@ const D3BarChart = ({ allMaterials }: any) => {
         } else {
             stacked = 0
         }
-        
+
     }
     useEffect(() => {
-        
+
         console.log("MATERIALS")
         console.log(allMaterials)
         const allMaterialsArray = convertMaterialsToArray(allMaterials);
@@ -70,7 +70,7 @@ const D3BarChart = ({ allMaterials }: any) => {
             tooltip
                 .style('top', event.pageY + 'px')
                 .style('left', (event.pageX + 10) + 'px')
-                console.log(event.pageY)
+            console.log(event.pageY)
         }
         var mouseleave = function (event: any, d: any) {
             tooltip
@@ -99,7 +99,7 @@ const D3BarChart = ({ allMaterials }: any) => {
                 return d.name;
             })
         );
-            const maxValue = filteredData.length > 0 ? Math.max(...filteredData.map((material) => material.value)) : 0;
+        const maxValue = filteredData.length > 0 ? Math.max(...filteredData.map((material) => material.value)) : 0;
         y.domain([
             0,
             maxValue
@@ -107,54 +107,54 @@ const D3BarChart = ({ allMaterials }: any) => {
 
         function update() {
 
-        
-        /// BARS
-        if(stacked) {
-            svg
-            .selectAll(".bar")
-            .data(filteredData)
-            .enter()
-            .append("rect")
-            .attr("class", "bar")
-            .attr("x", function (d: any) {
-                return x(d.name) as number;
-            })
 
-            .attr("width", x.bandwidth())
+            /// BARS
+            if (stacked) {
+                svg
+                    .selectAll(".bar")
+                    .data(filteredData)
+                    .enter()
+                    .append("rect")
+                    .attr("class", "bar")
+                    .attr("x", function (d: any) {
+                        return x(d.name) as number;
+                    })
+
+                    .attr("width", x.bandwidth())
 
 
-            .attr("y", function (d: any) {
-                return y(0);
-            })
-            .attr("height", function (d) { return height - y(0); }) // always equal to 0
-            .on("mouseover", mouseover)
-            .on("mouseleave", mouseleave)
-            .on("mousemove", mousemove)
+                    .attr("y", function (d: any) {
+                        return y(0);
+                    })
+                    .attr("height", function (d) { return height - y(0); }) // always equal to 0
+                    .on("mouseover", mouseover)
+                    .on("mouseleave", mouseleave)
+                    .on("mousemove", mousemove)
+            }
+            else {
+                svg
+                    .selectAll(".bar")
+                    .data(filteredData)
+                    .enter()
+                    .append("rect")
+                    .attr("class", "bar")
+                    .attr("x", function (d: any) {
+                        return x(d.name) as number;
+                    })
+
+                    .attr("width", x.bandwidth())
+
+
+                    .attr("y", function (d: any) {
+                        return y(0);
+                    })
+                    .attr("height", function (d) { return height - y(0); }) // always equal to 0
+                    .on("mouseover", mouseover)
+                    .on("mouseleave", mouseleave)
+                    .on("mousemove", mousemove)
+
+            }
         }
-        else {
-        svg
-            .selectAll(".bar")
-            .data(filteredData)
-            .enter()
-            .append("rect")
-            .attr("class", "bar")
-            .attr("x", function (d: any) {
-                return x(d.name) as number;
-            })
-
-            .attr("width", x.bandwidth())
-
-
-            .attr("y", function (d: any) {
-                return y(0);
-            })
-            .attr("height", function (d) { return height - y(0); }) // always equal to 0
-            .on("mouseover", mouseover)
-            .on("mouseleave", mouseleave)
-            .on("mousemove", mousemove)
-
-        }
-    }
         update();
         svg.append("g").call(d3.axisLeft(y));
 
@@ -194,11 +194,11 @@ const D3BarChart = ({ allMaterials }: any) => {
             .style("border-radius", "5px")
             .style("padding", "10px")
             .style("position", "absolute")
-        
+
 
         // Three function that change the tooltip when user hover / move / leave a cell
         // https://d3-graph-gallery.com/graph/barplot_stacked_hover.html
-        
+
 
 
     });
@@ -210,11 +210,7 @@ const D3BarChart = ({ allMaterials }: any) => {
 
     return (
         <div className="bar-chart">
-            <CustomButton btnType='button'
-                          containerStyles="bg-primary-green hover:bg-transparent text-white hover:text-primary-green py-2 px-4 border border-primary-green rounded-full"
-                          title={"Stack"} 
-                          handleClick={toggleStacked} />
-            {/* Additional JSX if needed */}
+
 
             <div id="my_dataviz"></div>
         </div>

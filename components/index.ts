@@ -8,6 +8,7 @@ import SearchMaterial from "./SearchMaterial";
 import ShowMore from "./ShowMore";
 import MaterialCard from "./MaterialCard";
 import MaterialDetails from "./MaterialDetails";
+import DataVizNav from "./DataVizNav";
 export {
     Hero,
     CustomButton,
@@ -18,6 +19,7 @@ export {
     SearchMaterial,
     ShowMore,
     MaterialCard,
-    MaterialDetails
+    MaterialDetails,
+    DataVizNav
 
 }
