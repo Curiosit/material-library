@@ -10,7 +10,7 @@ async function DataViz ({searchParams}: SearchParamsProps) {
   const fetchedMaterials =  await fetchEPDs({
     name: searchParams.name || '',
     type: searchParams.type || '',
-    limit: searchParams.limit || 10,
+    limit: searchParams.limit || 20,
   }); 
   const calculatedMaterials = calcMaterials(fetchedMaterials)
   const allMaterials = sortMaterials(calculatedMaterials)

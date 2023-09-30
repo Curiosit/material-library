@@ -27,6 +27,7 @@ const D3BarChart = ({ allMaterials }: any) => {
 
         return dataArray;
     };
+    
     useEffect(() => {
         console.log("MATERIALS")
         console.log(allMaterials)
@@ -34,6 +35,29 @@ const D3BarChart = ({ allMaterials }: any) => {
         console.log(allMaterialsArray);
         const filteredData = allMaterialsArray;
 
+
+
+
+        // TOOLTIP SETUP
+
+        var mouseover = function (event: any, d: any) {
+            //const node = d3.select(this.parentNode)
+            tooltip
+                .html("" + d.name + "<br>" + "GWP: " + d.value)
+                .style("opacity", 1)
+            console.log(d)
+        }
+        var mousemove = function (event: any, d: any) {
+            tooltip
+                .style("left", (d3.mouse(this)[0] + 90) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+                .style("top", (d3.mouse(this)[1]) + "px")
+        }
+        var mouseleave = function (event: any, d: any) {
+            tooltip
+                .style("opacity", 0)
+        }
+
+        //////////////////
         const margin = { top: 20, right: 20, bottom: 200, left: 70 };
         const width = 960 - margin.left - margin.right;
         const height = 500 - margin.top - margin.bottom;
@@ -54,10 +78,10 @@ const D3BarChart = ({ allMaterials }: any) => {
                 return d.name;
             })
         );
-
+            const maxValue = filteredData.length > 0 ? Math.max(...filteredData.map((material) => material.value)) : 0;
         y.domain([
             0,
-            500,
+            maxValue
         ]);
 
 
@@ -78,8 +102,9 @@ const D3BarChart = ({ allMaterials }: any) => {
             .attr("y", function (d: any) {
                 return y(d.value);
             })
-            .attr("height", function(d) { return height - y(0); }) // always equal to 0
+            .attr("height", function (d) { return height - y(0); }) // always equal to 0
             .on("mouseover", mouseover)
+            .on("mouseleave", mouseleave)
 
 
 
@@ -105,47 +130,43 @@ const D3BarChart = ({ allMaterials }: any) => {
         // Animation
         svg.selectAll("rect")
             .transition()
-            .duration(800)
-            .attr("y", function (d:any) { return y(d.value); })
-            .attr("height", function (d:any) { return height - y(d.value); })
-            .delay(function (d, i) { console.log(i); return (i * 100) })
+            .duration(100)
+            .attr("y", function (d: any) { return y(d.value); })
+            .attr("height", function (d: any) { return height - y(d.value); })
+            .delay(function (d, i) { console.log(i); return (i * 50) })
 
 
+        var tooltip = d3.select("#my_dataviz")
+            .append("div")
+            .style("opacity", 0)
+            .attr("class", "tooltip")
+            .style("background-color", "white")
+            .style("border", "solid")
+            .style("border-width", "1px")
+            .style("border-radius", "5px")
+            .style("padding", "10px")
+        console.log(tooltip)
 
+        // Three function that change the tooltip when user hover / move / leave a cell
+        // https://d3-graph-gallery.com/graph/barplot_stacked_hover.html
+        
 
 
     });
 
 
-    var tooltip = d3.select("#my_dataviz")
-    .append("div")
-    .style("opacity", 0)
-    .attr("class", "tooltip")
-    .style("background-color", "white")
-    .style("border", "solid")
-    .style("border-width", "1px")
-    .style("border-radius", "5px")
-    .style("padding", "10px")
 
-  // Three function that change the tooltip when user hover / move / leave a cell
-  // https://d3-graph-gallery.com/graph/barplot_stacked_hover.html
-  var mouseover = function(d:any, i:any) {
- 
-    tooltip
-        .html("" + d.name + "<br>" + "GWP: " + d.value)
-        .style("opacity", 1)
-    console.log(d)
-  }
-  
 
-return (
-    <div className="bar-chart">
-        {/* Additional JSX if needed */}
 
-        <div id="my_dataviz">Dataviz tooltip</div>
-    </div>
-    
-);
+
+    return (
+        <div className="bar-chart">
+            {/* Additional JSX if needed */}
+
+            <div id="my_dataviz"></div>
+        </div>
+
+    );
 };
 
 export default D3BarChart;
