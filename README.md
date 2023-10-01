@@ -25,6 +25,9 @@ Using D3 allowed to build data visualization graphics:
 ![beton2](https://github.com/Curiosit/material-library/assets/17218693/176c8b4d-a3ea-4935-b5a3-c840dd9e3fea)
 Exploring all concrete and comparing with each other
 
+![image](https://github.com/Curiosit/material-library/assets/17218693/e00536e5-52cb-4803-978a-fb3b3e61326d)
+Stacked bar chart shows the division of the carbon footprint into lifecycle phases
+
 ![scatterplot](https://github.com/Curiosit/material-library/assets/17218693/e3743025-86ee-449a-b589-cd2e03056d02)
 Exploring scatterplot of A1A3 carbon footrpint vs. C3C4 carbon footprint
 
