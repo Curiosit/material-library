@@ -130,6 +130,8 @@ const MaterialDetails = ({isOpen, closeModal, material}: MaterialDetailsProps) =
                   </div>
                   <div className='flex-1 flex flex-col gap-2'>
                     <h2 className='font-semibold text-xl capitalize'> {material.name}</h2>
+                    <p className='font-semibold'> {material.nameen}</p>
+                    <p className=''> {material.type}</p>
                     <div className='mt-3 flex flex-wrap gap-4'>
                           <div className='flex justify-between gap-5 w-full text-right' >
                             <h4 className='text-grey capitalize'>TOTAL</h4>
@@ -166,7 +168,7 @@ const MaterialDetails = ({isOpen, closeModal, material}: MaterialDetailsProps) =
                           <div className='w-full'><BarChart material={material} /></div>
                           
                           <div className='flex justify-between gap-5 w-full text-right' >
-                            <h4 className='text-grey capitalize'><a href={material.url}>{material.url}</a></h4>
+                            <h4 className='text-grey capitalize'><a href={material.url}>Download original EPD</a></h4>
                             
                           </div>
 

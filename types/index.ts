@@ -47,6 +47,7 @@ export interface CarProps {
 export interface MaterialProps {
     
     name: string;
+    nameen?: string;
     type: string;
     density?: number;
     uvalue?: number;
@@ -62,6 +63,8 @@ export interface SearchParamsProps {
 export interface EPDProps {
     
     name: string;
+    nameen?: string;
+    type?: string;
     A1A3?: number;
     C3?: number;
     C4?: number;

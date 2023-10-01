@@ -11,7 +11,9 @@ interface MaterialItem {
     A1A3: number;
     C3: number;
     C4: number;
-    C3C4?: number; // Assuming TOTAL is a numeric property
+    C3C4?: number;
+    type?: string;
+    nameen?: string; // Assuming TOTAL is a numeric property
     // Add other properties if needed
 }
 interface DataItem {
@@ -42,7 +44,8 @@ const D3ScatterPlot = ({ allMaterials }: any) => {
                 total: parseFloat((item.A1A3.toString() == '-' ? 0 : item.A1A3).toString()) + parseFloat(
                     ((item.C3.toString() == '-' ? 0 : parseFloat(item.C3.toString()))
                         + (item.C4.toString() == '-' ? 0 : parseFloat(item.C4.toString())))
-                        .toString())
+                        .toString()),
+                nameen: item.nameen
 
             }));
 
@@ -73,7 +76,7 @@ const D3ScatterPlot = ({ allMaterials }: any) => {
         var mouseover = function (event: any, d: any) {
             //const node = d3.select(this.parentNode)
             tooltip
-                .html("" + d.name + "<br>"
+                .html("" + d.name + "<br>" + d.nameen + "<br>"
                     + "A1A3: " + d.valueX + "kgCO2/" + d.unit + "<br>"
                     + "C3C4: " + d.valueY + "kgCO2/" + d.unit)
                 .style("opacity", 1)

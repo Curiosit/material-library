@@ -21,7 +21,10 @@ function MaterialCard({ material}:EPDCardProps) {
         <div className="car-card__content">
             <h2 className="car-card__content-title">{name}</h2>
         </div>
-        
+            <p className="flex mt-1 mb-1 text-[16x]">
+            
+            {material.nameen } 
+            </p>
             <p className="flex mt-1 mb-1 text-[16x]">
             
             {material.TOTAL  } kgCO2 / {material.unit}
@@ -32,7 +35,7 @@ function MaterialCard({ material}:EPDCardProps) {
                 <div className="flex flex-col justify-center items-center gap-2">
                     <Image src="/assign.png" width={20} height={20} alt="steering wheel" />
                     <p className='text-[14px]'>
-                        A1-A3: {A1A3} kgCO2
+                        A1-A3: {A1A3} kgCO2/{unit}  
                     </p>
                 </div>
                 <div className="flex flex-col justify-center items-center gap-2">
@@ -47,7 +50,7 @@ function MaterialCard({ material}:EPDCardProps) {
                 <div className="flex flex-col justify-center items-center gap-2">
                     <Image src="/weight.png" width={20} height={20} alt="gas" />
                     <p className='text-[14px]'>
-                       /{unit}  
+                       {material.type}
                     </p>
                 </div>
             </div>
