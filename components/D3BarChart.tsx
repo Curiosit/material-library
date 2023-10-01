@@ -1,9 +1,6 @@
 "use client"
 import React, { useState, useEffect } from "react";
 import * as d3 from "d3";
-import { EPDProps } from "@/types";
-import materials from "@/models/Material";
-import { CustomButton } from ".";
 import Link from "next/link";
 interface MaterialItem {
     name: string;
@@ -22,7 +19,7 @@ interface DataItem {
 }
 
 const D3BarChart = ({ allMaterials }: any) => {
-    console.log(materials)
+    
 
 
 

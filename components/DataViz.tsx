@@ -3,6 +3,7 @@ import { MaterialCard, ShowMore } from "."
 import { fetchEPDs } from "@/utils";
 import D3BarChart from "./D3BarChart";
 import D3ScatterPlot from "./D3ScatterPlot";
+import D3StackedBarChart from "./D3StackedBarChart";
 
 export interface DataVizProps {
     chartType: String;
@@ -63,14 +64,24 @@ async function DataViz({ chartType, searchParams }: DataVizProps) {
 
         return sortedArray;
     }
+    function renderSwitch(param: String) {
+        switch(param) {
+          case 'scatterplot':
+            return <D3ScatterPlot allMaterials={allMaterials} />;
+        case 'stackedbarchart':
+            return <D3StackedBarChart allMaterials={allMaterials} />;
+          default:
+            return <D3BarChart allMaterials={allMaterials} />;
+        }
+      }
     console.log("DATA VIZ")
     console.log(allMaterials)
     console.log("PATHNAME")
     console.log(chartType)
     return (
         <div>
-            {chartType == 'scatterplot' ? (<><D3ScatterPlot allMaterials={allMaterials} /></>) : (<><D3BarChart allMaterials={allMaterials} /></>)}
-
+            
+            {renderSwitch(chartType)}
         </div>
     )
 
