@@ -114,7 +114,7 @@ const D3StackedBarChart = ({ allMaterials }: any) => {
             .call(d3.axisLeft(y));
 
 
-        
+
 
 
         const stack: any = d3
@@ -155,7 +155,7 @@ const D3StackedBarChart = ({ allMaterials }: any) => {
             .on("mousemove", mousemove)
 
 
-        
+
         // remove previous labels
 
         svg
@@ -166,6 +166,19 @@ const D3StackedBarChart = ({ allMaterials }: any) => {
             .attr("transform", "rotate(-65)") // rotate the text elements
             .style("text-anchor", "end");
 
+
+
+            
+        var YaxisLabelX = -40;
+        var YaxisLabelY = height / 2;
+        svg
+            .append('g')
+            .attr('transform', 'translate(' + YaxisLabelX + ', ' + YaxisLabelY + ')')
+            .append('text')
+            .attr('text-anchor', 'middle')
+            .attr('transform', 'rotate(-90)')
+            .text('GWP kgCO2/ unit')
+            ;
         /* svg
             .append("g")
             .selectAll("g")
@@ -238,6 +251,8 @@ const D3StackedBarChart = ({ allMaterials }: any) => {
             .text(function (d) { return d })
             .attr("text-anchor", "left")
             .style("alignment-baseline", "middle")
+
+
 
     });
 

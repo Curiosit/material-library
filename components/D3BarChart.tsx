@@ -19,7 +19,7 @@ interface DataItem {
 }
 
 const D3BarChart = ({ allMaterials }: any) => {
-    
+
 
 
 
@@ -171,7 +171,16 @@ const D3BarChart = ({ allMaterials }: any) => {
             .attr("transform", "rotate(-65)") // rotate the text elements
             .style("text-anchor", "end");
 
-
+        var YaxisLabelX = -40;
+        var YaxisLabelY = height / 2;
+        svg
+            .append('g')
+            .attr('transform', 'translate(' + YaxisLabelX + ', ' + YaxisLabelY + ')')
+            .append('text')
+            .attr('text-anchor', 'middle')
+            .attr('transform', 'rotate(-90)')
+            .text('GWP kgCO2/ unit')
+            ;
 
         // Animation
         svg.selectAll("rect")
@@ -207,17 +216,17 @@ const D3BarChart = ({ allMaterials }: any) => {
 
 
     return (<>
-        
+
         <div className="bar-chart">
 
 
-        <div id="my_dataviz"></div>
-        
+            <div id="my_dataviz"></div>
+
         </div>
         <Link href="/dataviz/barchart/?limit=10" className="bg-primary-green hover:bg-transparent text-white hover:text-primary-green py-2 px-4 border border-primary-green rounded-full m-2">
             Limit to 10 records
         </Link>
-        </>
+    </>
     );
 };
 

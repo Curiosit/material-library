@@ -86,7 +86,7 @@ const D3ScatterPlot = ({ allMaterials }: any) => {
         }
 
         //////////////////
-        const margin = { top: 20, right: 20, bottom: 20, left: 70 };
+        const margin = { top: 20, right: 20, bottom: 50, left: 70 };
         const width = 830 - margin.left - margin.right;
         const height = 760 - margin.top - margin.bottom;
 
@@ -146,6 +146,27 @@ const D3ScatterPlot = ({ allMaterials }: any) => {
             .style("border-radius", "5px")
             .style("padding", "10px")
             .style("position", "absolute")
+
+            var XaxisLabelX = width / 2;
+            var XaxisLabelY = height +40;
+            
+        svg
+                .append('g')
+                .attr('transform', 'translate(' + XaxisLabelX + ', ' + XaxisLabelY + ')')
+                .append('text')
+                .attr('text-anchor', 'middle')
+                .text('A1A3 kgCO2/ unit')
+                ;
+        var YaxisLabelX = -40;
+        var YaxisLabelY = height / 2;
+        svg
+                .append('g')
+                .attr('transform', 'translate(' + YaxisLabelX + ', ' + YaxisLabelY + ')')
+                .append('text')
+                .attr('text-anchor', 'middle')
+                .attr('transform', 'rotate(-90)')
+                .text('C3C4 kgCO2/ unit')
+                ;
 
     })
     // Three function that change the tooltip when user hover / move / leave a cell
