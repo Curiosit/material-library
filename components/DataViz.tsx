@@ -12,13 +12,15 @@ export interface DataVizProps {
 async function DataViz({ chartType, searchParams }: DataVizProps) {
     console.log(chartType);
     console.log("CHARTTYPE")
-    const { name, type } = searchParams;
+    let { name, type, limit } = searchParams;
     //const [sortingBy, setSortingBy] = useState('')
-
+    if (!limit) {
+        limitSwitch(chartType)
+    }
     const fetchedMaterials = await fetchEPDs({
         name: searchParams.name || '',
         type: searchParams.type || '',
-        limit: searchParams.limit || 100,
+        limit: limit,
     });
     const calculatedMaterials = calcMaterials(fetchedMaterials)
     const allMaterials = sortMaterials(calculatedMaterials)
@@ -64,23 +66,36 @@ async function DataViz({ chartType, searchParams }: DataVizProps) {
 
         return sortedArray;
     }
-    function renderSwitch(param: String) {
-        switch(param) {
-          case 'scatterplot':
-            return <D3ScatterPlot allMaterials={allMaterials} />;
-        case 'stackedbarchart':
-            return <D3StackedBarChart allMaterials={allMaterials} />;
-          default:
-            return <D3BarChart allMaterials={allMaterials} />;
+
+    function limitSwitch(param: String) {
+        switch (param) {
+            case 'scatterplot':
+                limit = 500;
+            case 'stackedbarchart':
+                limit = 25;
+            case 'barchart':
+                limit = 12;
+            default:
+                limit = 50;
         }
-      }
+    }
+    function renderSwitch(param: String) {
+        switch (param) {
+            case 'scatterplot':
+                return <D3ScatterPlot allMaterials={allMaterials} />;
+            case 'stackedbarchart':
+                return <D3StackedBarChart allMaterials={allMaterials} />;
+            default:
+                return <D3BarChart allMaterials={allMaterials} />;
+        }
+    }
     console.log("DATA VIZ")
     console.log(allMaterials)
     console.log("PATHNAME")
     console.log(chartType)
     return (
         <div>
-            
+
             {renderSwitch(chartType)}
         </div>
     )

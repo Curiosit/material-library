@@ -29,15 +29,22 @@ const D3ScatterPlot = ({ allMaterials }: any) => {
 
     const convertMaterialsToArray = (allMaterials: MaterialItem[]) => {
         const dataArray = allMaterials.map(item => (
-            
-            {
-            
-            name: item.name,
-            valueX: parseFloat(item.A1A3.toString()),
-            valueY: parseFloat((item.C3.toString() == '-' ? 0 : item.C3 + item.C4).toString()),
-            unit: item.unit,
 
-        }));
+            {
+
+                name: item.name,
+                valueX: parseFloat((item.A1A3.toString() == '-' ? 0 : item.A1A3).toString()),
+                valueY: parseFloat(
+                    ((item.C3.toString() == '-' ? 0 : parseFloat(item.C3.toString()))
+                        + (item.C4.toString() == '-' ? 0 : parseFloat(item.C4.toString())))
+                        .toString()),
+                unit: item.unit,
+                total: parseFloat((item.A1A3.toString() == '-' ? 0 : item.A1A3).toString()) + parseFloat(
+                    ((item.C3.toString() == '-' ? 0 : parseFloat(item.C3.toString()))
+                        + (item.C4.toString() == '-' ? 0 : parseFloat(item.C4.toString())))
+                        .toString())
+
+            }));
 
         return dataArray;
     };
@@ -53,7 +60,7 @@ const D3ScatterPlot = ({ allMaterials }: any) => {
     useEffect(() => {
 
         console.log("MATERIALS")
-        console.log(allMaterials)
+        //console.log(allMaterials)
         const allMaterialsArray = convertMaterialsToArray(allMaterials);
         console.log(allMaterialsArray);
         const filteredData = allMaterialsArray;
@@ -66,9 +73,9 @@ const D3ScatterPlot = ({ allMaterials }: any) => {
         var mouseover = function (event: any, d: any) {
             //const node = d3.select(this.parentNode)
             tooltip
-                .html("" + d.name + "<br>" 
-                + "A1A3: " + d.valueX + "kgCO2/" + d.unit + "<br>" 
-                + "C3C4: " + d.valueY + "kgCO2/" + d.unit)
+                .html("" + d.name + "<br>"
+                    + "A1A3: " + d.valueX + "kgCO2/" + d.unit + "<br>"
+                    + "C3C4: " + d.valueY + "kgCO2/" + d.unit)
                 .style("opacity", 1)
             d3.select(event.currentTarget).style("fill", "#27e693");
             console.log(d)
@@ -101,7 +108,7 @@ const D3ScatterPlot = ({ allMaterials }: any) => {
 
         // Add X axis
         var x = d3.scaleLinear()
-            .domain([-50, 500])
+            .domain([-700, 900])
             .range([0, width]);
         svg.append("g")
             .attr("transform", "translate(0," + height + ")")
@@ -109,12 +116,15 @@ const D3ScatterPlot = ({ allMaterials }: any) => {
 
         // Add Y axis
         var y = d3.scaleLinear()
-            .domain([-1, 25])
+            .domain([-700, 800])
             .range([height, 0]);
         svg.append("g")
             .call(d3.axisLeft(y));
 
-
+        // Add a scale for bubble size
+        var z = d3.scaleLinear()
+            .domain([0, 1000])
+            .range([2, 15]);
 
 
         /// SCATTER
@@ -126,13 +136,13 @@ const D3ScatterPlot = ({ allMaterials }: any) => {
             .append("circle")
             .attr("cx", function (d) { return x(d.valueX); })
             .attr("cy", function (d) { return y(d.valueY); })
-            .attr("r", 5)
+            .attr("r", function (d) { return z(d.total); })
             .style("fill", "#000000")
             .on("mouseover", mouseover)
             .on("mouseleave", mouseleave)
             .on("mousemove", mousemove)
 
-        
+
 
 
 
@@ -147,27 +157,41 @@ const D3ScatterPlot = ({ allMaterials }: any) => {
             .style("padding", "10px")
             .style("position", "absolute")
 
-            var XaxisLabelX = width / 2;
-            var XaxisLabelY = height +40;
-            
+        var XaxisLabelX = width / 2;
+        var XaxisLabelY = height + 40;
+
         svg
-                .append('g')
-                .attr('transform', 'translate(' + XaxisLabelX + ', ' + XaxisLabelY + ')')
-                .append('text')
-                .attr('text-anchor', 'middle')
-                .text('A1A3 kgCO2/ unit')
-                ;
+            .append('g')
+            .attr('transform', 'translate(' + XaxisLabelX + ', ' + XaxisLabelY + ')')
+            .append('text')
+            .attr('text-anchor', 'middle')
+            .text('A1A3 kgCO2/ unit')
+            ;
         var YaxisLabelX = -40;
         var YaxisLabelY = height / 2;
         svg
-                .append('g')
-                .attr('transform', 'translate(' + YaxisLabelX + ', ' + YaxisLabelY + ')')
-                .append('text')
-                .attr('text-anchor', 'middle')
-                .attr('transform', 'rotate(-90)')
-                .text('C3C4 kgCO2/ unit')
-                ;
+            .append('g')
+            .attr('transform', 'translate(' + YaxisLabelX + ', ' + YaxisLabelY + ')')
+            .append('text')
+            .attr('text-anchor', 'middle')
+            .attr('transform', 'rotate(-90)')
+            .text('C3C4 kgCO2/ unit')
+            ;
 
+
+
+        let zoom = d3.zoom()
+            .scaleExtent([0.25, 10])
+            .on('zoom', handleZoom);
+        function handleZoom(e: any) {
+            d3.select('svg g')
+                .attr('transform', e.transform);
+        }
+        function initZoom() {
+            d3.select('svg')
+                .call(zoom as any);
+        }
+        initZoom();
     })
     // Three function that change the tooltip when user hover / move / leave a cell
     // https://d3-graph-gallery.com/graph/barplot_stacked_hover.html

@@ -223,9 +223,9 @@ const D3BarChart = ({ allMaterials }: any) => {
             <div id="my_dataviz"></div>
 
         </div>
-        <Link href="/dataviz/barchart/?limit=10" className="bg-primary-green hover:bg-transparent text-white hover:text-primary-green py-2 px-4 border border-primary-green rounded-full m-2">
+        {/* <Link href="/dataviz/barchart/?limit=10" className="bg-primary-green hover:bg-transparent text-white hover:text-primary-green py-2 px-4 border border-primary-green rounded-full m-2">
             Limit to 10 records
-        </Link>
+        </Link> */}
     </>
     );
 };
